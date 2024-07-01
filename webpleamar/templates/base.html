@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,12 +15,10 @@
             <li><a href="{% url 'calendar_app:calendar' %}">Calendario</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% if user.has_perm('users_app.can_organize_groups')%}
-                    <li><a href="{% url 'organize_teams' %}"></a>Organizar Equipos</li>
-                {% endif %}
+                <li><a href="#">Organizar Grupos</a></li>
             {% else %}
-                <li><a href="{% url 'login' %}"></a>Login</li>
-        {% endif %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
     <div>
