@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de eventos</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/schedule.css' %}">
+</head>
+<body>
+    <h1>Calendario de eventos</h1>
+    <p>{{debug_message}}</p>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
