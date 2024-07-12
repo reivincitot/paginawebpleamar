@@ -1,13 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club de Pesca Pleamar</title>
+    {% block title %}<title>Club de Pesca Pleamar</title>{% endblock %}
 </head>
 <body>
+    
     <div class="container">
-        
+        {% include 'navbar.html' %}
+        <div class="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
     </div>
+        {% comment %} font awesome kit {% endcomment %}
+    <script src="https://kit.fontawesome.com/c2286c5998.js" crossorigin="anonymous"></script>
 </body>
 </html>

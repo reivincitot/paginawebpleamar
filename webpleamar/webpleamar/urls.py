@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
     path('', include('homepage.urls')),
+    #path('gallery_app/', include('gallery_app.urls')),
 ]
 
 

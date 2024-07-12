@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users_app',
     'homepage',
-    'gallery_app',
+    #'gallery_app',
     'schedule',
     'events'
 ]

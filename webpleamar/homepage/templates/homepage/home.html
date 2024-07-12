@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Bienvenido a la pagina del club</h1>
-    <p>Revisa nuestro <a href="{% url 'club_calendar' %}">calendario</a> para los siguientes eventos</p>
-</body>
-</html>
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container">
+    <h1 class="title">Club de pesca Pleamar</h1>
+        <h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequuntur, deleniti aliquam eos totam deserunt, sed itaque dolores eveniet doloribus incidunt illum nesciunt natus debitis repellendus. Ut illum laborum iure!   </p>
+        </h2>
+</div>
+{% endblock %}

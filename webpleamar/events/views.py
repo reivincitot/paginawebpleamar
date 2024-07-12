@@ -1,10 +1,13 @@
-from django.views.generic import TemplateView
+from django.shortcuts import render
+from .models import ClubEvent
 
+def event_list(request):
+    events = ClubEvent.objects.all()
+    return render(request, 'events/event_list.html', {'events': events})
 
-class CalendarView(TemplateView):
-    template_name = 'events/calendar.html'
+def event_detail(request, id):
+    event = ClubEvent.objects.get(id=id)
+    return render(request, 'events/event_detail.html', {'event': event})
 
-
-def club_calendar_view(request):
-    view = CalendarView.as_view()
-    return view(request)
+def calendar_view(request):
+    return(render,'events/calendar.html')

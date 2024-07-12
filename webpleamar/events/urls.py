@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import club_calendar_view
+from . import views
 
 urlpatterns = [
-    path('events/', club_calendar_view, name='club_calendar'),
-    ]
+    path('', views.event_list, name='event_list'),
+    path('<int:id>/', views.event_detail, name='event_detail'),
+    path('calendar/', views.calendar_view, name='calendar'),
+]
