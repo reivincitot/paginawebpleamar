@@ -8,4 +8,4 @@ class Historia(models.Model):
 class Participacion(models.Model):
     nombre_evento = models.CharField(max_length=255, verbose_name="Nombre del Evento")
     fecha = models.DateField(verbose_name="Fecha de participación")
-    resultado = models.TextField(verbose_name="Resultado")
+    descripcion = models.CharField(max_length=255, default="Descripción")

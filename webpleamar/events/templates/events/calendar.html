@@ -1,22 +1,15 @@
-{% load static%}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-        content="Stay organized with our user-friendly Calendar featuring events, reminders, and a customizable interface. Built with HTML, CSS, and JavaScript. Start scheduling today!" />
-    <meta name="keywords" content="calendar, events, reminders, javascript, html, css, open source coding" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/schedule.css' %}" />
+{% block meta_tags %}
+    {{ block.super }}
+{% endblock %}
+
+{% block title %}
     <title>Calendario de Eventos</title>
-</head>
+{% endblock %}
 
-<body>
+{% block content %}
     <div class="container">
         <div class="left">
             <div class="calendar">
@@ -52,24 +45,32 @@
             <div class="events"></div>
             <div class="add-event-wrapper">
                 <div class="add-event-header">
-                    <div class="title">Agregar Evento</div>
-                    <i class="fas fa-times close"></i>
+                    <h2>Añadir Evento</h2>
+                    <span class="close">&times;</span>
                 </div>
-                <div class="add-event-body">
-                    <div class="add-event-input">
-                        <input type="text" placeholder="Nombre del evento" class="event-name" />
+                <form id="add-event-form" method="POST" action="{% url 'add_event' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="event-name">Nombre del Evento</label>
+                        <input type="text" class="event-name" placeholder="Nombre del Evento" required>
+                        {{ form.titulo }}
                     </div>
-                    <div class="add-event-input">
-                        <input type="text" placeholder="Hora de inicio" class="event-time-from" />
+                    <div class="form-group">
+                        <label for="event-time-from">Hora del Evento</label>
+                        <input type="time" class="event-time-from" required>
+                        {{ form.fecha }}
                     </div>
-                    <div class="add-event-input">
-                        <input type="text" placeholder="Descripción" class="event-description" />
+                    <div class="form-group">
+                        <label for="event-description">Descripción del Evento</label>
+                        <input type="text" class="event-description" placeholder="Descripción del Evento" required>
+                        {{ form.descripcion }}
                     </div>
-                </div>
-                <div class="add-event-footer">
-                    <button class="add-event-btn">Agregar Evento</button>
-                </div>
+                    <div class="form-group">
+                        <button type="submit" class="add-event-btn">Añadir Evento</button>
+                    </div>
+                </form>
             </div>
+            
         </div>
         <button class="add-event">
             <i class="fas fa-plus"></i>
@@ -83,6 +84,4 @@
         </p>
     </div>
     <script src="{% static 'js/scripts.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}
