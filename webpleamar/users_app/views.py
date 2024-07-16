@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login, logout
+from django.contrib import messages
 
 
 def login_view(request):
@@ -9,8 +10,14 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Redirige a la página 'home' después del inicio de sesión
         else:
-            return redirect(request, 'account/login.html')
+            messages.error(request, 'Credenciales inválidas. Inténtelo de nuevo.')
+            return render(request, 'accounts/login.html')
     else:
-        return render(request,'account/login.html')
+        return render(request, 'accounts/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
