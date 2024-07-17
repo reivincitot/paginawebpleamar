@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import permission_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import ClubEvent
+from .models import ClubEvent, Torneo
+from .forms import TorneoForm
 import json
+
 
 def event_list(request):
     events = ClubEvent.objects.all()
@@ -37,3 +40,17 @@ def add_event(request):
         return JsonResponse({'message': 'Event added successfully'}, status=201)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@permission_required('events.can_add_torneo')
+def add_torneo(request):
+    if request.method == 'POST':
+        form = TorneoForm(request.POST)
+        if form.is_valid():
+            torneo = form.save(commit=False)
+            torneo.creado_por = request.user
+            torneo.save()
+            return redirect('home')
+    else:
+        form = TorneoForm
+    return render(request,'events/add_torneo.html',{'form':form})

@@ -1,19 +1,18 @@
-{% extends 'base.html'%}
-{% block content %}
+{% extends 'base.html' %}
+{% load static %}
 
+{% block content %}
 <div class="container">
-    <div>
-        <h1 class="title">Club de pesca Pleamar</h1>
+    <div class="titulo-pagina">
         <h2>Historia del Club</h2>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum cupiditate a doloremque, in asperiores quos hic facere nihil, delectus praesentium iste quis ullam aperiam illo voluptate sunt eaque, nisi voluptatum.</p>
     </div>
     <div class="forms">
-        {% if user.has_perm %}
-        <form action="" method="get">
-            <button type="button"></button>
+        {% if perms.homepage.add_torneo %}
+        <form action="{% url 'add_torneo' %}" method="get">
+            <button type="submit" class="fa fa-plus" title="Agregar Torneo"></button>
         </form>
         {% endif %}
     </div>
-
 </div>
 {% endblock %}
