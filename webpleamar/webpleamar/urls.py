@@ -4,16 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from users_app import views as user_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', user_views.login_view, name='login'),
-    path('accounts/login/', user_views.logout, name='logout'),
+    path('accounts/logout/', user_views.logout_view, name='logout'),  # Utiliza la función logout_view de users_app
     path('events/', include('events.urls')),
     path('', include('homepage.urls')),
-    #path('gallery_app/', include('gallery_app.urls')),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -52,5 +52,9 @@ def add_torneo(request):
             torneo.save()
             return redirect('home')
     else:
-        form = TorneoForm
-    return render(request,'events/add_torneo.html',{'form':form})
+        form = TorneoForm()
+    return render(request, 'events/add_torneo.html', {'form':form})
+
+def torneo_list(request):
+    torneos = Torneo.objects.all()
+    return render(request, 'events/torneo_list.html', {'torneos': torneos})

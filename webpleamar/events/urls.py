@@ -6,5 +6,5 @@ urlpatterns = [
     path('<int:id>/', views.event_detail, name='event_detail'),
     path('calendar/', views.calendar_view, name='calendar'),
     path('add/', views.add_event, name='add_event'),
-    path('add_torneo/', views.add_torneo, name='add_torneo')
+    path('add_torneo/', views.add_torneo, name='add_torneo'),
 ]

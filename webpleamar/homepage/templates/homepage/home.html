@@ -8,11 +8,33 @@
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum cupiditate a doloremque, in asperiores quos hic facere nihil, delectus praesentium iste quis ullam aperiam illo voluptate sunt eaque, nisi voluptatum.</p>
     </div>
     <div class="forms">
-        {% if perms.homepage.add_torneo %}
+        {% if perms.events.can_add_torneo %}
         <form action="{% url 'add_torneo' %}" method="get">
             <button type="submit" class="fa fa-plus" title="Agregar Torneo"></button>
         </form>
         {% endif %}
     </div>
+    <button id="toggleTorneosBtn" class="btn btn-primary">Lista de Torneos</button>
+    <div id="torneoList" class="torneo-list" style="display: none;">
+        <h3>Lista de Torneos</h3>
+        <ul>
+            {% for torneo in torneos %}
+            <li>{{ torneo.nombre }} - {{ torneo.puesto }}</li>
+            {% empty %}
+            <li>No hay torneos guardados.</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+
+<script>
+    document.getElementById('toggleTorneosBtn').addEventListener('click', function() {
+        var torneoList = document.getElementById('torneoList');
+        if (torneoList.style.display === 'none') {
+            torneoList.style.display = 'block';
+        } else {
+            torneoList.style.display = 'none';
+        }
+    });
+</script>
 {% endblock %}

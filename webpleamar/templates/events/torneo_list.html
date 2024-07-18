@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Listado de Torneos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Posición</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for torneo in torneos %}
+            <tr>
+                <td>{{ torneo.nombre }}</td>
+                <td>{{ torneo.puesto }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="document.getElementById('torneos-container').style.display='none';" class="btn btn-secondary">Volver</button>
+</div>
