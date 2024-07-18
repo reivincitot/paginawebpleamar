@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería</title>
+</head>
+<body>
+    <h1>Galería</h1>
+    {% if user.is_authenticated %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+            subir archivo
+        </button>
+    </form>
+    {% endif %}
+
+    <h2>Imágenes Subidas</h2>
+    <div class="gallery">
+        {% for imagen in imagenes %}
+            <div class="image">
+                <img src="{{ imagen.archivo_imagen.url }}" alt="{{ imagen.titulo }}">
+                <p>{{ imagen.titulo }}</p>
+                <p>{{ imagen.descripcion }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}

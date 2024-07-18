@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,9 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/calendar.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}" />
     <title>Calendar with Events</title>
 </head>
+
 <body>
     <div class="container">
         <div class="left">
@@ -69,7 +71,7 @@
                 </div>
             </div>
         </div>
-        {% if user.has_perm 'events.add_event'%}
+        {% if perms.events.add_event %}
         <button class="add-event" title="Agregar competencia">
             <i class="fas fa-plus"></i>
         </button>
@@ -83,4 +85,5 @@
     </div>
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
+
 </html>
