@@ -3,7 +3,7 @@
 
 {% block content %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +15,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">
-            subir archivo
-        </button>
+        <button type="submit">Subir archivo</button>
     </form>
     {% endif %}
 
@@ -28,6 +26,28 @@
                 <img src="{{ imagen.archivo_imagen.url }}" alt="{{ imagen.titulo }}">
                 <p>{{ imagen.titulo }}</p>
                 <p>{{ imagen.descripcion }}</p>
+
+                <!-- Botón de like -->
+                <form action="{% url 'dar_like' 'imagen' imagen.id %}" method="post" class="like-form">
+                    {% csrf_token %}
+                    <button type="submit">Like</button>
+                    <span>{{ imagen.total_likes }}</span>
+                </form>
+
+                <!-- Formulario de comentarios -->
+                <h3>Comentarios</h3>
+                <form action="{% url 'agregar_comentario' 'imagen' imagen.id %}" method="post">
+                    {% csrf_token %}
+                    <textarea name="contenido" rows="2" placeholder="Añadir un comentario"></textarea>
+                    <button type="submit">Comentar</button>
+                </form>
+
+                <!-- Mostrar comentarios -->
+                <div class="comentarios">
+                    {% for comentario in imagen.comentarios.all %}
+                        <p>{{ comentario.usuario.username }}: {{ comentario.contenido }}</p>
+                    {% endfor %}
+                </div>
             </div>
         {% endfor %}
     </div>
