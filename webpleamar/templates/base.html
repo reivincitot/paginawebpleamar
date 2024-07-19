@@ -1,28 +1,29 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Club Pleamar {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    {% block title %}<title>Club de Pesca Pleamar</title>{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c2286c5998.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'gallery_app:gallery' %}">Galería</a></li>
-            <li><a href="{% url 'calendar_app:calendar' %}">Calendario</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                <li><a href="#">Organizar Grupos</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    <div>
-        {% block content %}{% endblock %}
+    <div class="container">
+        <h1 class="titulo-main-page">
+            Club de pesca Pleamar
+        </h1>
+    </div>
+    <div class="container">
+        {% include 'navbar.html' %}
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 </body>
+
 </html>
