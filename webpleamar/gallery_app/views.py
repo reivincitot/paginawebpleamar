@@ -10,7 +10,7 @@ def gallery_view(request):
         form = ImagenForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('gallery_app')
+            return redirect('gallery')
     else:   
         form = ImagenForm()
         imagenes = Imagen.objects.all()
@@ -60,11 +60,13 @@ def agregar_comentario(request, tipo, id):
                 comentario.video = objeto
             else:
                 comentario.imagen = objeto
-                comentario.save()
-                return redirect("detalle", tipo=tipo, id=objeto.id)
-    else:
-        form = ComentarioForm()
-    return render(request, "gallery_aoo/agregar_comentario.html", {"form": form})
+            comentario.save()
+            return redirect('gallery')
+        else:
+            comentario.imagen = objeto
+        comentario.save()
+        return redirect('gallery')
+    return redirect('gallery')
 
 
 @login_required
@@ -81,7 +83,7 @@ def dar_like(request, tipo, id):
     )
     if not created:
         like.delete()
-    return JsonResponse({"likes_count": objeto.likes.count()})
+    return redirect('gallery')
 
 
 @login_required

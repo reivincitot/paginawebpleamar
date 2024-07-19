@@ -11,6 +11,9 @@ class Imagen(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def total_likes(self):
+        return self.Like.count()
 
 class Video(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)  # Proporciona un valor predeterminado
@@ -21,6 +24,9 @@ class Video(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def total_likes(self):
+            return self.Like.count()
 
 class Comentario(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)  # Proporciona un valor predeterminado
@@ -55,3 +61,5 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ("usuario", "video", "imagen")
+
+        
