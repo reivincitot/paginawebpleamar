@@ -11,31 +11,36 @@
     <h1>{{ objeto.titulo }}</h1>
     {% if objeto.archivo_video %}
     <video controls>
-        <img src="{{objeto.archivo_video.url}}" type="video/mp4">
+        <source src="{{ objeto.archivo_video.url }}" type="video/mp4">
     </video>
     {% endif %}
     <p>{{ objeto.descripcion }}</p>
-    <p>Likes: {{objeto.likes.count}}</p>
-    <button onclick="darLike({{objeto.id }}, '{{tipo}}')">Me gusta</button>
+    <p class="likes">Likes: {{ objeto.likes.count }}</p>
+    <button onclick="darLike({{ objeto.id }}, '{{ tipo }}')">Me gusta</button>
     <h2>Comentarios</h2>
-    {% form comentario in comentarios %}
+    {% for comentario in comentarios %}
     <p>{{ comentario.usuario }}: {{ comentario.contenido }}</p>
     {% if comentario.usuario == user %}
-    <a href="{% url ' editar_comentario' comentario.id %}">Editar</a>
+    <a href="{% url 'editar_comentario' comentario.id %}">Editar</a>
     {% endif %}
     {% endfor %}
-    <form action="{% url ' agregar_comentario' tipo objeto.id %}" method="post">
+    <form action="{% url 'agregar_comentario' tipo objeto.id %}" method="post">
         {% csrf_token %}
-        {{ form.as_p}}
+        {{ form.as_p }}
         <button type="submit">Agregar Comentario</button>
     </form>
 </body>
 <script>
-    function darLike(id,tipo) {
-        fetch('/like${tipo}/${id}', {method:'POST', headers:{'X-CSRFToken': '{{csrf_token}}'}})
-        .then(response=>response.json())
-        .then(data =>{
-            document.querySelector('p.likes').innerText = 'Likes: ${data.likes_count}';
+    function darLike(id, tipo) {
+        fetch(`/like/${tipo}/${id}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('p.likes').innerText = `Likes: ${data.likes_count}`;
         });
     }
 </script>
