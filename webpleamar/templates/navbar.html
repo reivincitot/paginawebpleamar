@@ -1,6 +1,7 @@
 {% url 'home' as home %}
 {% url 'gallery' as gallery %}
 {% url 'calendar' as calendar %}
+{% load group_tags %}
 
 <nav class="navbar">
     <div class="container navbar">
@@ -20,6 +21,11 @@
                     <span class="fa-solid fa-calendar-days"></span>
                 </a>
             </li>
+            {% if request.user|has_group:"Capitan" or request.user|has_group:"Administrador" or request.user|has_group:"Presidente"%}
+            <li class="navbar-item">
+                <a href="{% url 'equipos_list' %}">Equipos</a>
+            </li>
+            {% endif %}
             {% if user.is_authenticated %}
             <li class="navbar-item">
                 <a href="{% url 'logout' %}" class="nav-link">Cerrar sesión

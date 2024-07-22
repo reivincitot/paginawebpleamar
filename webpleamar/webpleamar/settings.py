@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'homepage',
     'gallery_app',
     'schedule',
-    'events'
+    'events',
+    'equipos_app'
 ]
 
 MIDDLEWARE = [

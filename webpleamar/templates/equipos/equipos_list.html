@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Lista de Equipos</h2>
+    <a href="{% url 'add_equipo' %}" class="btn btn-primary">Agregar Equipo</a>
+    <ul>
+        {% for equipo in equipos %}
+        <li>{{ equipo.nombre_equipo }} - {{ equipo.capitan_equipo }} - {{ equipo.participante_2 }} - {{ equipo.participante_3 }} - {{ equipo.participante_4 }} - {{ equipo.participante_5 }}</li>
+        {% empty %}
+        <li>No hay equipos guardados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

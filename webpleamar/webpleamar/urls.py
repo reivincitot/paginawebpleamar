@@ -10,7 +10,8 @@ urlpatterns = [
     path('accounts/logout/', user_views.logout_view, name='logout'),
     path('events/', include('events.urls')),
     path('', include('homepage.urls')),
-    path('gallery_app/', include('gallery_app.urls'))
+    path('gallery_app/', include('gallery_app.urls')),
+    path('equipos/', include('equipos_app.urls')),
 ]
 
 if settings.DEBUG:
